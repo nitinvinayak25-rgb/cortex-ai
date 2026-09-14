@@ -1,0 +1,12 @@
+{
+  "name": "cortex-ai",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "google-auth-library": "^11.0.2"
+  }
+}

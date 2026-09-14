@@ -1,0 +1,404 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: #020812;
+  color: white;
+  font-family: Inter, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.cortex-bg {
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(0, 119, 255, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(0, 153, 255, 0.05),
+      transparent 25%
+    ),
+    #020812;
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(
+      rgba(0, 132, 255, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 132, 255, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 45px 45px;
+}
+
+/* =========================
+   BLUE GLOW
+========================= */
+
+.blue-glow {
+  box-shadow:
+    0 0 10px rgba(0, 153, 255, 0.7),
+    0 0 30px rgba(0, 119, 255, 0.4),
+    0 0 80px rgba(0, 119, 255, 0.15);
+}
+
+/* =========================
+   JARVIS CORE
+========================= */
+
+.core-glow {
+  box-shadow:
+    0 0 15px #00aaff,
+    0 0 35px #008cff,
+    0 0 70px rgba(0, 119, 255, 0.8),
+    inset 0 0 25px rgba(0, 183, 255, 0.5);
+}
+
+.core-inner {
+  box-shadow:
+    inset 0 0 20px rgba(0, 153, 255, 0.5),
+    0 0 20px rgba(0, 153, 255, 0.6);
+}
+
+/* =========================
+   GLASS CARDS
+========================= */
+
+.glass {
+  background: rgba(4, 18, 35, 0.72);
+  border: 1px solid rgba(0, 140, 255, 0.16);
+  backdrop-filter: blur(18px);
+}
+
+.glass:hover {
+  border-color: rgba(0, 153, 255, 0.35);
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020812;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #075985;
+  border-radius: 20px;
+}
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================
+   TERRIFIC LOGIN ANIMATIONS
+   ========================================= */
+
+/* Moving background grid */
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 45px 45px;
+  }
+}
+
+.animate-grid {
+  animation: gridMove 8s linear infinite;
+}
+
+
+/* Large background glow */
+@keyframes glowMove {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.animate-glow {
+  animation: glowMove 5s ease-in-out infinite;
+}
+
+
+/* Slow background glow */
+@keyframes glowSlow {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.animate-glow-slow {
+  animation: glowSlow 8s ease-in-out infinite;
+}
+
+
+/* Logo outer ring */
+@keyframes logoPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+.animate-logo-pulse {
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+
+/* Slow rotation */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 8s linear infinite;
+}
+
+
+/* Reverse rotation */
+@keyframes spinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-reverse {
+  animation: spinReverse 4s linear infinite;
+}
+
+
+/* Icon animation */
+@keyframes iconAnimation {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.7));
+  }
+
+  25% {
+    transform: scale(1.15) rotate(-8deg);
+    filter: drop-shadow(0 0 15px rgba(34, 211, 238, 1));
+  }
+
+  50% {
+    transform: scale(1.25) rotate(8deg);
+    filter: drop-shadow(0 0 25px rgba(34, 211, 238, 1));
+  }
+
+  75% {
+    transform: scale(1.15) rotate(-5deg);
+    filter: drop-shadow(0 0 15px rgba(34, 211, 238, 1));
+  }
+}
+
+.animate-icon {
+  animation: iconAnimation 2.5s ease-in-out infinite;
+}
+
+
+/* Inner icon container */
+@keyframes iconContainer {
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(0, 220, 255, 0.4);
+  }
+
+  50% {
+    box-shadow:
+      0 0 25px rgba(0, 220, 255, 0.8),
+      0 0 45px rgba(0, 140, 255, 0.4);
+  }
+}
+
+.animate-icon-container {
+  animation: iconContainer 2s ease-in-out infinite;
+}
+
+
+/* Small glowing dot */
+@keyframes dotPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+.animate-dot {
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+
+/* System text glow */
+@keyframes textGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(34, 211, 238, 0.4);
+  }
+
+  50% {
+    text-shadow:
+      0 0 10px rgba(34, 211, 238, 0.8),
+      0 0 20px rgba(34, 211, 238, 0.4);
+  }
+}
+
+.animate-text-glow {
+  animation: textGlow 2s ease-in-out infinite;
+}
+
+
+/* Login card entrance */
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card {
+  animation: cardAppear 0.8s ease-out;
+}
+
+
+/* =========================================
+   FLOATING PARTICLES
+   ========================================= */
+
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 15px #22d3ee;
+  opacity: 0.6;
+  animation: floatingParticle 6s ease-in-out infinite;
+}
+
+.particle-1 {
+  top: 20%;
+  left: 8%;
+  animation-delay: 0s;
+}
+
+.particle-2 {
+  top: 35%;
+  right: 12%;
+  animation-delay: 1s;
+}
+
+.particle-3 {
+  bottom: 25%;
+  left: 15%;
+  animation-delay: 2s;
+}
+
+.particle-4 {
+  bottom: 15%;
+  right: 20%;
+  animation-delay: 3s;
+}
+
+.particle-5 {
+  top: 15%;
+  right: 30%;
+  animation-delay: 4s;
+}
+
+.particle-6 {
+  top: 60%;
+  left: 5%;
+  animation-delay: 5s;
+}
+
+
+@keyframes floatingParticle {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateY(-30px) scale(1.5);
+    opacity: 1;
+  }
+}
