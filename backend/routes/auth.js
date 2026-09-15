@@ -37,6 +37,13 @@ router.post("/google", async (req, res) => {
       });
     }
 
+    if (!process.env.GOOGLE_CLIENT_ID) {
+      console.error("Google login is not configured: GOOGLE_CLIENT_ID is missing");
+      return res.status(500).json({
+        message: "Google login is not configured on the backend",
+      });
+    }
+
     // Verify Google ID token
     const ticket = await googleClient.verifyIdToken({
       idToken: credential,
@@ -92,10 +99,10 @@ router.post("/google", async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Google login error:", error);
+    console.error("Google login error:", error.message);
 
     res.status(401).json({
-      message: "Google login failed",
+      message: "Google login failed. Check that the frontend and backend use the same Google client ID.",
     });
   }
 });

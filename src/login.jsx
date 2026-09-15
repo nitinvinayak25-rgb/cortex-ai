@@ -26,7 +26,10 @@ function Login() {
       );
 
       if (!backendResponse.ok) {
-        throw new Error("Failed to authenticate with backend");
+        const errorBody = await backendResponse.json().catch(() => ({}));
+        throw new Error(
+          errorBody.message || "Failed to authenticate with backend"
+        );
       }
 
       const backendUser = await backendResponse.json();
