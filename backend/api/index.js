@@ -2,7 +2,9 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+
 const connectDB = require("./config/db");
+
 const authRoutes = require("./routes/auth");
 const chatRoutes = require("./routes/chat");
 const activityRoutes = require("./routes/activity");
@@ -11,6 +13,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 app.use("/api/auth", authRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/activity", activityRoutes);
@@ -22,7 +25,6 @@ app.get("/", (req, res) => {
   });
 });
 
-
 app.get("/api/health", (req, res) => {
   res.json({
     status: "OK",
@@ -30,6 +32,6 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-
 connectDB();
 
+module.exports = app;
