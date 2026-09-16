@@ -21,8 +21,13 @@ If you are developing a production application, we recommend using TypeScript wi
 
 The frontend and backend must use the same Google OAuth **Web application** client ID.
 
+Current deployments:
+
+- Frontend: `https://cortex-ai-rosy.vercel.app`
+- Backend: `https://backend-six-inky-b8h2hf3zrd.vercel.app`
+
 1. In Google Cloud Console, open the OAuth client under **APIs & Services > Credentials**.
-2. Add the deployed frontend URL, including its scheme, to **Authorized JavaScript origins**. For example: `https://your-frontend.vercel.app`.
+2. Add `https://cortex-ai-rosy.vercel.app` to **Authorized JavaScript origins**. Also add any custom frontend domain used in production.
 3. Add `VITE_GOOGLE_CLIENT_ID` to the frontend Vercel project.
 4. Add `GOOGLE_CLIENT_ID` with the same value to the backend Vercel project.
 5. Add `VITE_API_URL` to the frontend project, pointing to the deployed backend URL.
