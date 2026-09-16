@@ -4,6 +4,7 @@ const { OAuth2Client } = require("google-auth-library");
 
 const User = require("../models/User");
 const auth = require("../middleware/auth");
+const connectDB = require("../config/db");
 
 const router = express.Router();
 
@@ -51,11 +52,19 @@ router.post("/google", async (req, res) => {
       });
     }
 
-    // Verify Google ID token
-    const ticket = await googleClient.verifyIdToken({
-      idToken: credential,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
+    let ticket;
+
+    try {
+      ticket = await googleClient.verifyIdToken({
+        idToken: credential,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
+    } catch (error) {
+      console.error("Google token verification failed:", error.message);
+      return res.status(401).json({
+        message: "Google credential is invalid or uses a different client ID.",
+      });
+    }
 
     const payload = ticket.getPayload();
 
@@ -69,7 +78,15 @@ router.post("/google", async (req, res) => {
       });
     }
 
-    // Find or create user in MongoDB
+    if (!process.env.JWT_SECRET) {
+      console.error("Google login is not configured: JWT_SECRET is missing");
+      return res.status(500).json({
+        message: "Google login is not configured on the backend",
+      });
+    }
+
+    await connectDB();
+
     const user = await User.findOneAndUpdate(
       {
         $or: [
@@ -106,10 +123,10 @@ router.post("/google", async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Google login error:", error.message);
+    console.error("Google login persistence error:", error.message);
 
-    res.status(401).json({
-      message: "Google login failed. Check that the frontend and backend use the same Google client ID.",
+    res.status(503).json({
+      message: "Google login is temporarily unavailable because the backend database cannot be reached.",
     });
   }
 });

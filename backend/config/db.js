@@ -10,14 +10,28 @@ if (dnsServers.length > 0) {
   dns.setServers(dnsServers);
 }
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
+let connectionPromise;
 
-    console.log("MongoDB connected");
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
+const connectDB = async () => {
+  if (mongoose.connection.readyState === 1) {
+    return;
   }
+
+  if (!connectionPromise) {
+    connectionPromise = mongoose
+      .connect(process.env.MONGO_URI, {
+        serverSelectionTimeoutMS: 5000,
+      })
+      .then(() => {
+        console.log("MongoDB connected");
+      })
+      .catch((error) => {
+        connectionPromise = undefined;
+        throw error;
+      });
+  }
+
+  await connectionPromise;
 };
 
 module.exports = connectDB;
