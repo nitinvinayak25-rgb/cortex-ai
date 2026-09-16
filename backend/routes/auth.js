@@ -27,6 +27,13 @@ const createToken = (user) =>
 // GOOGLE LOGIN
 // ==========================================
 
+router.get("/google", (req, res) => {
+  res.json({
+    status: "OK",
+    message: "Google login endpoint is available. Send a POST request with a Google credential.",
+  });
+});
+
 router.post("/google", async (req, res) => {
   try {
     const { credential } = req.body;
