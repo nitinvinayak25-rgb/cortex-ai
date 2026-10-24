@@ -126,7 +126,7 @@ router.post("/google", async (req, res) => {
     console.error("Google login persistence error:", error.message);
 
     res.status(503).json({
-      message: "Google login is temporarily unavailable because the backend database cannot be reached.",
+      message: "Google sign-in is temporarily unavailable because the backend cannot connect to its database. Please try again later.",
     });
   }
 });

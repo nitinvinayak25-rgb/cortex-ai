@@ -12,4 +12,4 @@ Required backend environment variables:
 - `GOOGLE_CLIENT_ID`
 - `GEMINI_API_KEY`
 
-Verify the deployment at `https://your-backend.vercel.app/api/health`. It should return JSON with `status: "OK"`.
+Verify the deployment at `https://your-backend.vercel.app/api/health`. It should return JSON with `status: "OK"` and `"database": "connected"`. A `503` means the backend is up but cannot connect to MongoDB. Confirm `MONGO_URI` is set for the backend Vercel project and that the MongoDB provider allows connections from the deployed backend. For MongoDB Atlas, check the deployment's allowed network access and database-user credentials; prefer fixed egress or a private network over broadly opening database access.

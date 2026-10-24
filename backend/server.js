@@ -29,15 +29,23 @@ app.get("/", (req, res) => {
 });
 
 // Health check
-app.get("/api/health", (req, res) => {
-  res.json({
-    status: "OK",
-    message: "TERRIFIC backend is running",
-  });
+app.get("/api/health", async (req, res) => {
+  try {
+    await connectDB();
+    res.json({
+      status: "OK",
+      database: "connected",
+      message: "TERRIFIC backend is running",
+    });
+  } catch (error) {
+    console.error("Health check database connection failed:", error.message);
+    res.status(503).json({
+      status: "ERROR",
+      database: "unavailable",
+      message: "The backend is running but cannot connect to its database.",
+    });
+  }
 });
-
-// Connect MongoDB
-connectDB();
 
 // Local development only
 if (require.main === module) {
@@ -50,4 +58,3 @@ if (require.main === module) {
 
 // Export for Vercel
 module.exports = app;
-

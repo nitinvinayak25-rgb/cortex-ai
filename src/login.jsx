@@ -1,12 +1,17 @@
+import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { Sparkles } from "lucide-react";
 
 function Login() {
+  const [loginError, setLoginError] = useState("");
+
   // ==========================================
   // GOOGLE LOGIN SUCCESS
   // ==========================================
 
   const handleGoogleSuccess = async (credentialResponse) => {
+    setLoginError("");
+
     try {
       console.log("Google login successful");
 
@@ -61,6 +66,9 @@ function Login() {
       window.location.reload();
     } catch (error) {
       console.error("Google login error:", error);
+      setLoginError(
+        error.message || "Google sign-in failed. Please try again."
+      );
     }
   };
 
@@ -389,6 +397,15 @@ function Login() {
           <p className="relative text-blue-200 mb-8">
             Sign in to access your personal AI.
           </p>
+
+          {loginError && (
+            <p
+              className="relative mb-5 rounded-xl border border-red-400/40 bg-red-500/10 px-4 py-3 text-left text-sm text-red-200"
+              role="alert"
+            >
+              {loginError}
+            </p>
+          )}
 
           {/* ==========================================
               CUSTOM ANIMATED GOOGLE LOGIN BUTTON
